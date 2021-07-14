@@ -39,6 +39,12 @@
 		    display: block;
 		}
 
+		#eraser img {
+			width: 10%;
+			left: -42px;
+			position: relative;
+		}
+
 		
 	</style>
 
@@ -86,7 +92,16 @@
 					});
 					cp.$container.append($swatch);
 				}
+				//adds the eraser to the palette
+				var eraser = $("#eraser")
+				cp.$container.append(eraser);
 			}
+
+			//gives the eraser its functionality. If clicked on, it activates the white color
+			//in the color palette
+			$("#eraser").click(function() {
+				cp.history.push("#FFFFFF")
+			}) 
 
 			// loads a set of colors from a json to create a color palette
 			function getColorsCreatePalette(){
@@ -126,6 +141,10 @@
 <body>
 
 	<canvas id="myCanvas" width="1800px" height="1200px"></canvas>
+	
 	<div id="color-palette"></div>
+	<div id="eraser">
+		<img src= "/static/coloring/images/eraser.png"/>
+	</div>
 </body>
 </html>
