@@ -58,14 +58,15 @@
 			width: 25%;
 			position: relative;
 			left: -455px;
-		
+			
+
 		}
-		
-		#button {
-			position: relative;
+
+        #button {
+            position: relative;
 			top: -5px;
 			left: 90%;
-		}
+        }
 
 		
 	</style>
@@ -82,7 +83,7 @@
 			var mandala = {
 				item: null,
 				lastClicked: null,
-				filePath: '/static/coloring/images/coloring3svg.svg'
+				filePath: '/static/coloring/images/white.svg'
 			};
 
 			// color palette
@@ -112,8 +113,6 @@
 							path.strokeColor = cp.history[cp.history.length - 1];
 							path.strokeWidth = 5;
 						}
-						
-						
 					}
 				}
 				tool.onMouseDrag = function (event) {
@@ -221,9 +220,9 @@
 	<div id="bucket">
 		<img src= "/static/coloring/images/bucket.png"/>
 	</div>
-	<div id = "button">
-		<a href='/coloring/blank'><button>Switch to Drawing Page</button></a>
-	</div>
-	
+    <div id = "button">
+        <a href='/coloring/new_interaction'><button>Switch to Coloring Page</button></a>
+    </div>
+    
 </body>
 </html>
