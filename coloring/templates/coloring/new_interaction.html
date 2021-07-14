@@ -52,6 +52,8 @@
 		window.onload = function() {
 			var canvas = document.getElementById('myCanvas');
 
+			var bucket_select = true;
+
 			// coloring page
 			var mandala = {
 				item: null,
@@ -68,14 +70,26 @@
 
 			function myCustomInteraction() {
 				var tool = new paper.Tool();
-
+				
 				tool.onMouseDown = function (event) {
-				    var hit = mandala.item.hitTest(event.point, { tolerance: 10, fill: true });
-				    if (hit) {
+					if (bucket_select == true) {
+						var hit = mandala.item.hitTest(event.point, { tolerance: 10, fill: true });
+				    	if (hit) {
 				    		// Color pallette keeps track of the full history of colors, though we
 				    		// only color in with the most-recent color.
 				        hit.item.fillColor = cp.history[cp.history.length - 1];
-				    }
+				    	}
+					} else {
+						path = new paper.Path();
+						path.strokeColor = cp.history[cp.history.length - 1];
+						path.strokeWidth = 10;
+						
+					}
+				}
+				tool.onMouseDrag = function (event) {
+					if (bucket_select == false) {
+						path.add(event.point);
+					}
 				}
 			}
 
@@ -95,12 +109,19 @@
 				//adds the eraser to the palette
 				var eraser = $("#eraser")
 				cp.$container.append(eraser);
+
+				var pencil = $("#pencil")
+				cp.$container.append(pencil);
 			}
 
 			//gives the eraser its functionality. If clicked on, it activates the white color
 			//in the color palette
 			$("#eraser").click(function() {
 				cp.history.push("#FFFFFF")
+			}) 
+
+			$("#pencil").click(function() {
+				bucket_select = false;
 			}) 
 
 			// loads a set of colors from a json to create a color palette
@@ -145,6 +166,9 @@
 	<div id="color-palette"></div>
 	<div id="eraser">
 		<img src= "/static/coloring/images/eraser.png"/>
+	</div>
+	<div id="pencil">
+		<img src= "/static/coloring/images/pencil.png"/>
 	</div>
 </body>
 </html>
